@@ -19,6 +19,7 @@ namespace GameStore.WebUI.Controllers
 
         public ViewResult Checkout()
         {
+            
             return View(new ShippingDetails());
         }
 
@@ -33,6 +34,10 @@ namespace GameStore.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 orderProcessor.ProcessOrder(cart, shippingDetails);
+                foreach(var item in cart.Lines)
+                {
+                    item.Product.Emount--;
+                }
                 cart.Clear();
                 return View("Completed");
             }

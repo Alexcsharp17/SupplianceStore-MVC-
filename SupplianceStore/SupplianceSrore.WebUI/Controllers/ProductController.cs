@@ -102,6 +102,12 @@ namespace SupplianceSrore.WebUI.Controllers
                 return null;
             }
         }
+        [HttpGet]
+        public ActionResult ProdDetails(int productId)
+        {
+            Product product = repository.Products.FirstOrDefault(p => p.ProductId == productId);
+            return View(product);
+        }
 
     }
 }

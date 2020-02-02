@@ -28,8 +28,11 @@ namespace SupplianceStore.Domain.Entities
         [Range(0.01, double.MaxValue, ErrorMessage = "Пожалуйста, введите положительное значение для цены")]
         public decimal Price { get; set; }
         [Display(Name= "Скидка(%)")]
-        [Range(0.01, 100, ErrorMessage = "Пожалуйста, введите значение от 1 до 100")]
+        [Range(0, 100, ErrorMessage = "Пожалуйста, введите значение от 1 до 100")]
         public int Discount { get; set; }//In persengate
+        [Display(Name="Колво шт")]
+        [Range(0,int.MaxValue,ErrorMessage ="Значение должно быть положительным")]
+        public int Emount { get; set; }
         public byte[] ImageData { get; set; }
         public string ImageMimeType { get; set; }
     }

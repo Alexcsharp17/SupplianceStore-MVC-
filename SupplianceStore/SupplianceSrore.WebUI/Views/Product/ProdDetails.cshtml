@@ -1,0 +1,90 @@
+﻿@model SupplianceStore.Domain.Entities.Product
+
+@{
+    ViewBag.Title = "ProdDetails";
+    Layout = "~/Views/Shared/_AdminLayoutPage1.cshtml";
+}
+             
+          <h3 class="card-title">@Model.Name</h3>
+      
+
+         
+            @if (Model.Emount > 100)
+            {
+                <p class="em_full">В наличии</p> 
+            }
+            
+            else if (Model.Emount > 0)
+            {
+                <p class="em_small">Заканчивается</p> 
+            }
+            else
+            {
+                <p class="em_zero">Нет в наличии</p>
+            }
+            @if (Model.Discount != 0)
+            {
+                <p class="card-text label label-primary old_pr">@Model.Price.ToString("# грн")</p>
+                var nPrice = @Model.Price * Convert.ToDecimal((100 - @Model.Discount)) * Convert.ToDecimal(0.01);
+                <p class="card-text label label-primary n_price pr">@nPrice.ToString("# грн")</p>
+            }
+            else
+            {
+                <p class="card-text label label-primary pr">@Model.Price.ToString("# грн")</p>
+            }
+
+
+            <p class="card-text">@Model.Description</p>
+            @using (Html.BeginForm("AddToCart", "Cart"))
+            {
+                <div class="card-text ">
+                    @Html.HiddenFor(x => x.ProductId)
+                    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                    <input type="submit" class="btn btn-success" value="Добавить в корзину" />
+                </div>
+            }
+       
+
+
+
+<style>
+   
+    .old_pr{
+        text-decoration:line-through;
+        color:black;
+    }
+    .n_price{
+        color:red;
+        font-size:16px;
+    }
+    .em_full{
+        margin-top:-10px;
+        color:green;
+    }
+    .em_small {
+        margin-top: -10px;
+        color: indianred;
+    }
+    .em_zero {
+        margin-top: -10px;
+        color: red;
+    }
+   .pr{
+       font-size:18px;
+   }
+   .card-body{
+       padding:5px;
+   }
+   .lnk{
+       font-size:16px;
+       color:black;
+       font-weight:bold;
+       display:inline;
+       
+       word-break:break-word;
+   }
+   .lnk:hover{
+       text-decoration:none;
+   }
+</style>
+
