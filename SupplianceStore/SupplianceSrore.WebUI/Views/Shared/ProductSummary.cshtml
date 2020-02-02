@@ -1,0 +1,52 @@
+﻿@model SupplianceStore.Domain.Entities.Product
+
+
+
+
+    <div class="card" style="width: 18rem;">
+        <img src="~/Content/Images/загружено.png" class="card-img-top" alt="pict" width="177" height="150" />
+        <div class="card-body">
+            <h4 class="card-title">@Model.Name</h4>
+            @if (Model.Discount != 0)
+            {
+                <p class="card-text label label-primary old_pr">@Model.Price.ToString("# грн")</p>
+                var nPrice = @Model.Price * Convert.ToDecimal((100 - @Model.Discount)) * Convert.ToDecimal(0.01);
+                <p class="card-text label label-primary n_price">@nPrice.ToString("# грн")</p>
+            }
+            else
+            {
+                <p class="card-text label label-primary">@Model.Price.ToString("# грн")</p>
+            }
+
+            <p class="card-text">@Model.Description</p>
+            @using (Html.BeginForm("AddToCart", "Cart"))
+            {
+                <div class="card-text">
+                    @Html.HiddenFor(x => x.ProductId)
+                    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                    <input type="submit" class="btn btn-success" value="Добавить в корзину" />
+                </div>
+            }
+        </div>
+    </div>
+
+
+
+
+<style>
+    .card{
+        background-color:lightgray;
+        border:1px solid black;
+        margin-bottom:5px;
+        
+    }
+    .old_pr{
+        text-decoration:line-through;
+        color:black;
+    }
+    .n_price{
+        color:red;
+        font-size:16px;
+    }
+   
+</style>
