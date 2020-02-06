@@ -3,8 +3,9 @@
 
 
 
-    <div class="card" style="width: 18rem;">
-        <img src="~/Content/Images/загружено.png" class="card-img-top" alt="pict" width="177" height="150" />
+    <div class="card wrp" style="width: 18rem;">
+        <img src="@Url.Action("GetImage", "Product",
+                new { Model.ProductId })"  class="card-img-top" alt="pict" width="177" height="150" />
         <div class="card-body">
          @using(Html.BeginForm("ProdDetails", "Product",FormMethod.Get))
          {
@@ -40,19 +41,19 @@
             }
 
 
-            <p class="card-text">@Model.Description</p>
+            <p class="card-text">@Model.Slug</p>
             @using (Html.BeginForm("AddToCart", "Cart"))
             {
                 <div class="card-text ">
                     @Html.HiddenFor(x => x.ProductId)
                     @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-                    <input type="submit" class="btn btn-success" value="Добавить в корзину" />
+                    <input type="submit" class="btn btn-success sbm" value="Добавить в корзину" />
                 </div>
             }
         </div>
     </div>
 
-
+  
 
 
 <style>
@@ -104,5 +105,14 @@
        
      border:none;
        text-decoration:none;
+   }
+   .sbm{
+       position:absolute;
+       bottom:2px;;
+   }
+   .wrp{
+       position:relative;
+       width:250px;
+       margin-left:5px;
    }
 </style>

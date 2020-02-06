@@ -20,10 +20,14 @@ namespace SupplianceStore.Domain.Entities
         [Display(Name = "Описание")]
         [Required(ErrorMessage = "Пожалуйста, введите описание для товара")]
         public string Description { get; set; }
+        [Display(Name = "Короткое описание")]
+        [DataType(DataType.MultilineText)]
+        [Required(ErrorMessage = "Пожалуйста, укажите короткое описание")]
+        public string Slug { get; set; }
         [Display(Name = "Категория")]
         [Required(ErrorMessage = "Пожалуйста, укажите категорию для товара")]
         public string Category { get; set; }
-        [Display(Name = "Цена (руб)")]
+        [Display(Name = "Цена (грн)")]
         [Required]
         [Range(0.01, double.MaxValue, ErrorMessage = "Пожалуйста, введите положительное значение для цены")]
         public decimal Price { get; set; }
@@ -35,5 +39,10 @@ namespace SupplianceStore.Domain.Entities
         public int Emount { get; set; }
         public byte[] ImageData { get; set; }
         public string ImageMimeType { get; set; }
+        public ICollection<Review> Reviews { get; set; }
+        public Product()
+        {
+            Reviews = new List<Review>();
+        }
     }
 }

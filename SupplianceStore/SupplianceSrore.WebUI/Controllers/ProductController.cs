@@ -14,10 +14,12 @@ namespace SupplianceSrore.WebUI.Controllers
     {
         // GET: Product
         private IProductRepository repository;
+        private IReviewRepository rep2;
         public int pageSize = 12;
-        public ProductController(IProductRepository repo)
+        public ProductController(IProductRepository repo ,IReviewRepository repo2)
         {
             repository = repo;
+            rep2 = repo2;
         }
         public ViewResult List(string category, int page = 1)
         {
@@ -93,7 +95,7 @@ namespace SupplianceSrore.WebUI.Controllers
             Product product = repository.Products
                 .FirstOrDefault(g => g.ProductId == productId);
 
-            if (product != null)
+            if ( product != null && product.ImageData != null && product.ImageData != null)
             {
                 return File(product.ImageData, product.ImageMimeType);
             }
@@ -103,9 +105,20 @@ namespace SupplianceSrore.WebUI.Controllers
             }
         }
         [HttpGet]
-        public ActionResult ProdDetails(int productId)
+        public ActionResult ProdDetails(int? productId)
         {
+            if (productId == null)
+            {
+                return HttpNotFound();
+            }
+            IEnumerable<Review> reviews = rep2.Reviews.Where(x => x.ProductId == productId);
+            ViewBag.Reviews = reviews;
             Product product = repository.Products.FirstOrDefault(p => p.ProductId == productId);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+          
             return View(product);
         }
 

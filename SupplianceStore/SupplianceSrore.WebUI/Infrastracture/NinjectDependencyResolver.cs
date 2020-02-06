@@ -37,6 +37,7 @@ namespace SupplianceStore.WebUI.Infrastructure
             // Здесь размещаются привязки
 
             kernel.Bind<IProductRepository>().To<EFProductRepository>();
+            kernel.Bind<IReviewRepository>().To<EFProductRepository>();
 
             EmailSettings emailSettings = new EmailSettings
             {

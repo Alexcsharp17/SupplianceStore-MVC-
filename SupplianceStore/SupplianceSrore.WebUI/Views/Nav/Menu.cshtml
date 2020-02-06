@@ -1,25 +1,5 @@
 ﻿
 @model IEnumerable<string>
-@using (Html.BeginForm("List", "Product"))
-{
-    string res= @Session["ser-rec"].ToString().Replace("$", "");
-
-    <div class="input-group">
-        <input type="text" class="form-control" name="ser_rec" value=@res>
-  <div class="input-group-append">
-      <input type="submit" class="btn btn-success" value="Поиск" />
-  </div>
-</div>
-    
-    
-    <style>
-        .input-group{
-            display:flex;
-            padding-bottom:10px;
-        }
-    </style>
-
-}
 
 
 @Html.ActionLink("Домой", "List", "Product", null,
