@@ -49,7 +49,7 @@ namespace SupplianceSrore.WebUI.Controllers
             ProductsListViewModel model = new ProductsListViewModel
             {
                 Products = repository.Products
-                    .Where(p => p.Name.ToLower().Replace(" ","").Contains(ser_rec.ToLower().Replace(" ", "")) )
+                    .Where(p => p.Name.ToLower().Replace(" ","").Contains(ser_rec.ToLower().Replace(" ", "")) && (category == null || p.Category == category))
                     .OrderBy(game => game.ProductId)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize),

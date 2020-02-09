@@ -46,21 +46,22 @@
                 <input type="submit" class="btn btn-success" value="Добавить в корзину" />
             </div>
         }
-        @using (Html.BeginForm("AddReview", "Review"))
+        @using (Html.BeginForm("AddReview", "Review", FormMethod.Get))
         {
             <div class="card-text ">
                 @Html.HiddenFor(x => x.ProductId)
+
 
                 <input type="submit" class="btn btn-outline-secondary text-right" value="Добавить отзыв" />
             </div>
         }
     </div>
+
    
-    
 
 
 
-    <div class="reviews">
+    <div class="reviews" id="reviews">
         @foreach (var review in ViewBag.Reviews)
         {
             <div class="card text-center">

@@ -17,7 +17,7 @@ namespace SupplianceStore.Domain.Entities
         [Required(ErrorMessage = "Пожалуйста, введите ваш отзыв")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
-        [Display(Name = "Описание")]
+        [Display(Name = "Отценка")]
         [Required(ErrorMessage = "Пожалуйста, поставьте отценку")]
         [Range(0, 5, ErrorMessage = "Значение должно быть от 1 до 5")]
         public int Stars { get; set; }
